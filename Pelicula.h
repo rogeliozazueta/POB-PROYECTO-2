@@ -35,8 +35,8 @@ class Pelicula{
 	string Getgenero(){return genero;};
 	int GetcantActores(){return cantActores;};
 	
-	Actor GetlistaActores(int x){return listaActores[x];}; ////
-	bool AgregarActor(Actor a); //duda	
+	Actor GetlistaActores(int x){return listaActores[x];}; //Debe recibir como parámetro un entero. Este entero corresponderá al subíndice del arreglo de listaActores que se quiere accesar
+	bool AgregarActor(Actor a); 	
 	void muestra();
 };
 
@@ -86,7 +86,7 @@ bool Pelicula::AgregarActor(Actor a) //recibe objeto de tipo actor( id y nombre)
 			{
 				listaActores[i].Setid(a.getid()); // le da id a la lista acotres
 				listaActores[i].Setnombre(a.getnombre()); // le da nombre lista
-				cantActores = cantActores + 1;
+				cantActores = cantActores + 1; // le suma uno a la cantAct
 				return true;
 			}
 			
@@ -96,11 +96,10 @@ bool Pelicula::AgregarActor(Actor a) //recibe objeto de tipo actor( id y nombre)
 	
 	if (cantActores == 10)
 	{
-		//std::cout << "La lista de actores se encuentra llena." << std::endl;
-		return false;
+		return false;  // La lista ya se lleno 
 	}
 	
-	if (cantActores == 0)
+	if (cantActores == 0) // primer caso 3
 	{
 		listaActores[0].Setid(a.getid());
 		listaActores[0].Setnombre(a.getnombre());
@@ -116,7 +115,7 @@ void Pelicula::muestra()
 
 	
 	int i = 0;
-	cout << numPeli << "\t" << titulo << "\t Anio: " << anio << "\t Duracion: " << duracion << "\t Genero: " << genero << endl<<endl;
+	cout << numPeli << "  " << titulo << "   Anio: " << anio << "  Duracion: " << duracion << "  Genero: " << genero << endl<<endl;
 	
 	while (i<cantActores)
 	{
@@ -130,5 +129,4 @@ void Pelicula::muestra()
 
 }
   	
-
 
