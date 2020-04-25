@@ -47,8 +47,8 @@ Funcion::Funcion(string cve , int numpel , Hora h , int s)
 
 void Funcion::muestra()
 {
-	cout << "Hora ";hora.muestra();
-	cout<< "Clave: " << cveFuncion << "    Numero de pelicula: " << numPeli << " \t Sala: " << sala << endl;
+	cout << "hora ";hora.muestra();
+	cout<< "clave: " << cveFuncion << "    numero de pelicula: " << numPeli << "  sala: " << sala << endl;
 	
 }
 
