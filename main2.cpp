@@ -20,28 +20,33 @@ int main()
 
 	
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Cargando Archivo de actores al Arreglo de tipo Actor
+	
+	// Cargando el  Arreglo de tipo Actor  del archivo de texto Actores.txt
 	ifstream ArchEntA;
 	ArchEntA.open("Actores.txt");
 	string TextoActores;
 	int i=0;
 	
 	
-	while (getline(ArchEntA,TextoActores))  //Obtiene solo los numeros del archivo en enteros
+	while (getline(ArchEntA,TextoActores))  //Todo el renglon hasta que se acabe 
 	{ 
 		
-		int espacio=TextoActores.find(" "); //Busca el espacio dentro del texto y le da posicion a la variable
+		int espacio=TextoActores.find(" "); //Busca el primer espacio dentro del texto y le da posicion a la variable
 		string nombre=TextoActores.substr(espacio+1); // Guarda el  nombre al buscar el espacio con la variable anterior y sumarle 1;
 		int ID=stoi(TextoActores.substr(0,espacio)); //convierte el id que esta en texto y buscado mediante el metodo substring a entero
 		a1.Setid(ID); // se asginan el id objeto de tipo actor
 		a1.Setnombre(nombre);// se asigna nombre al objeto tipo actor 
-		arregloactores[i]=a1; //se guarda en el arreglo de tipo actor
+		arregloactores[i]=a1; //se guarda en el arreglo de tipo actor utilizando el objeto de tipo actor creado
 		i++;
 		
 	}
 	int actoresenlista=i; // cuenta los actores que estan en el arreglo;
 	ArchEntA.close();
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	
@@ -54,12 +59,14 @@ int main()
 
 	int numPeli,anio,duracion,cantactores,ID;
 	string genero,titulo;
-	 //duda
 	 
 	 // el archivo pelicula no tiene clave , la clave es asignada por el usuario
-
-while (ArchEntP >> numPeli) {
-        //Busca en el archivo peliculas elprimer int y lo agrega
+ 
+ 
+  // todo se va agregando mediante el metodo de set al arreglo pelicula de tipo pelicula 
+while (ArchEntP >> numPeli) 
+{
+        //Busca en el archivo peliculas el primer int y lo agrega
     	peliculas[i].SetnumPeli(numPeli);
     	
     	//Busca el segundo entero que es el anio y lo agrega
@@ -76,52 +83,66 @@ while (ArchEntP >> numPeli) {
      	// busca la cantidad de actores para tomarla como variable del ciclo for de los ids
         ArchEntP >> cantactores;
         
-        
+        // En cuanto al id viene dado por la cantidad de actores 
          // buscar el ID tantas veces que la cantidad de actores lo indique ya que el archivo indica cantidad y luego los ids
-        for (int aux = 0; aux < cantactores; aux++){
-            ArchEntP >> ID;
-    		for (int aux1 = 0; aux1 <actoresenlista; aux1++) {
-                if (ID == arregloactores[aux1].getid() )//verifica que el id del archivo de texto que se leyo se encuentre en el arregloactores previamente configurado si si , este agregara a la lista actores
-				{
+        for (int aux = 0; aux < cantactores; aux++)
+		{
+        ArchEntP >> ID;
+    	for (int aux1 = 0; aux1 <actoresenlista; aux1++)  // lo hace dependiendo del numero de actores cargados 
+		{
+    			
+        if (ID == arregloactores[aux1].getid() )//verifica que el id del archivo de texto que se leyo se encuentre en el arregloactores previamente cargado si si , este agregara a la lista actores
+		{
                     peliculas[i].AgregarActor(arregloactores[aux1]); //se mete el arreglo actores a la funcion agregar actores de la clase pelicula , le pasa la lista al arreglo peliculas para depues mostrarlo
-                }
-            }
-     }
+        }													// Aqui se agregan datos a la lista actores
+        }
+       }
             
         getline(ArchEntP, titulo);  // lee el titulo y lo agrega
-        //cout << titulo << endl;
-       peliculas[i].Settitulo(titulo);
+         peliculas[i].Settitulo(titulo);
         i++;
     
         
-    }
-     int peliculasenlista=i; // nos cuenta las peliculas en la lista
+}
+    int peliculasenlista=i; // nos cuenta las peliculas en la lista
     ArchEntP.close();
+    
+    
+    
+    
+    
+    
+    
     ////////////////////////////////////////////////////////////////////////////////
     
     //FUNCIONES
     
     int x=0;
     bool controlerexterno =true; 
-    while(controlerexterno == 1){ //Nos controla el numero de funciones que deseamos agregar si se establece controladorexterno a 0 se sale y va al menu
+    while(controlerexterno == 1)
+	
+	{ //Nos controla el numero de funciones que deseamos agregar si se establece controladorexterno a 0 se sale y va al menu
 	
         int nof,Numpeli , hora , minutos , nosala;
         string cveFuncion ;
         
         go:
-        cout<<"Cuantas funciones quieres agregar? (Maximo 20)"<<endl;  // se piden el numero de funciones a agregar 
+        cout<<"Â¿Cuantas funciones quieres agregar? (Maximo 20)"<<endl;  // se piden el numero de funciones a agregar 
         cin>>nof;
         
         if (nof< 21&& nof>0) // el limite de funciones es de 20 asi lo establece el proyecto
 		
 		{
             	for (int i = 0; i < nof; i++)  // el codigo pedira los atributos de las funciones dependiendo de cuantas funciones
-				  {
-                cout << "Ingrese la clave de la Funcion: " << endl;
+			{
+                cout << "Teclea la clave de la funcion: " << endl;
                 cin >> cveFuncion;
-               	f1.SetcveFuncion(cveFuncion);                // Pide clave funcion 
+               	f1.SetcveFuncion(cveFuncion);                // Pide clave funcion  , el usuario la asigna.
                	
                	
+				   
+				   
+			////////////////////////////////////////////////////////////////////////////////////////////
 				   
 				   //  se pide el Numero pelicula validando que exista
                	
@@ -130,7 +151,7 @@ while (ArchEntP >> numPeli) {
 				while(controladorinterno==true)
                	{
                	
-            	cout << "Ingrese el número de película: " << endl;
+            	cout << "Teclea el numero de la pelicula: " << endl;
                 cin >> Numpeli;  //se ingresa el numero de la pelicula 
                 
 				while(x<peliculasenlista)  // se ejectua mientras se menor a las peliculasenlista de las que agregamos de el archivo de peliculas
@@ -147,16 +168,16 @@ while (ArchEntP >> numPeli) {
 				
                 if (controladorinterno == true) // si controlador sigue siendo true significa que el numerode pelicula que se ingreso no existia entonces se tiene que volver a ingresar
                 {
-                	cout << "\nPor favor ingrese un numero valido.  " << endl;
+                	cout << "Por favor ingrese un numero valido.  " << endl;
 				}
 				x=0;
 				
 				controladorinterno==true;
-			   }
+			    }
 			   	
 			  
 			   ////////////////////////////////////////////////////////////////////////////////////
-              
+               // Se pide la hora 
 			  
 			  	controladorinterno=true;
 			    while(controladorinterno==true) // se repite pedir hora y minutos hasta que se obtenga falso que indicaria que el formato de hora fue valido
@@ -167,23 +188,26 @@ while (ArchEntP >> numPeli) {
                 cin >> minutos;
                 if ((hora>0 && hora<25) && (minutos>=0&&minutos<60)) //condiciones del formato de hora 24 Hrs
                 	{
-                		 Hora horariofuncion(hora, minutos);
+                		 Hora horariofuncion(hora, minutos); // se crea un objeto de tipo hora para cargarlo a uno tipo funcion  y despues pasarlo al arreglo de funciones
                 		 f1.Sethora(horariofuncion);
                 		 controladorinterno=false;
 					}
 					else // se ingreso un formaot invalido
 					{
-						cout << "\nPor favor ingrese un formato valido.  " << endl;
+						cout << "Por favor ingrese un formato valido.  " << endl;
 					}
 				}
 				
 				
 				
                /////////////////////////////////////////////////////////////// 
-                cout << "Ingrese el número de sala: " << endl;
+               
+               /// numero de sala 
+               
+                cout << "Teclea el numero de la sala " << endl;
                 cin >> nosala;
 
-                Hora horariofuncion(hora, minutos);
+                Hora horariofuncion(hora, minutos);   // se crea un objeto de tipo hora para cargarlo a uno tipo funcion  y despues pasarlo al arreglo de gfunciones
                 Funcion f2(cveFuncion,Numpeli,horariofuncion,nosala);	// los datos pedidos de las funciones se guardan en un objeto que depues se guarda en el arreglo de tipo Funcion 
                 funciones[i] =f2; // se cargan los valores  establecidos en el arreglo funciones
 			    nofunciones++; // variable para contar cuantas funciones fueron registradas
@@ -225,15 +249,15 @@ while (ArchEntP >> numPeli) {
     do{
         system("cls");        // Para limpiar la pantalla
         
-        // Texto del menú que se verá cada vez
+        // Texto del menÃº 
         
         cout << "\n\nMenu de Opciones" << endl;
-        cout << "1. Opcion 1" << endl;
-        cout << "2. Opcion 2" << endl;
-        cout << "3. Opcion 3" << endl;
-        cout << "4. Opcion 4" << endl;
-        cout << "5. Opcion 5" << endl;
-        cout << "6. Opcion 6" << endl;
+        cout << "1. Consulta de actores" << endl;
+        cout << "2. Consulta de Peliculas" << endl;
+        cout << "3. Consulta de funciones disponibles" << endl;
+        cout << "4. Consulta de funciones por hora" << endl;
+        cout << "5. Consulta de funciones por clave " << endl;   
+        cout << "6. Consulta de funciones por ID" << endl;
         cout << "7. SALIR" << endl;
         
         cout << "\nIngrese una opcion: ";
@@ -246,7 +270,7 @@ while (ArchEntP >> numPeli) {
             {
 			
               i=0;
-              while(i<actoresenlista)
+              while(i<actoresenlista)  //recorrer el arreglo actores y los muestra id y nombre
 			{
 				arregloactores[i].muestra();
 				i++;
@@ -261,7 +285,7 @@ while (ArchEntP >> numPeli) {
             case 2:
             {
 			
-            	i=0;
+            	i=0;      //recorre el arreglo peliculas y muestra todas las pelis
 				while(i<peliculasenlista){
 				peliculas[i].muestra();
 				i++;	
@@ -278,7 +302,7 @@ while (ArchEntP >> numPeli) {
             ///////////////////////////////////////////////////////////
             case 3:
             {
-			
+			                             /// recorre el arreglo funciones y muestra todas las funciones que se agregaron 
             	i=0;
                 while (i<nofunciones)
 			{
@@ -300,27 +324,29 @@ while (ArchEntP >> numPeli) {
 				int hora,minutos;
 				int i=0;
 				bool controlador=true;
-                cout << "Ingrese la hora de la funcion (Solo Hora): " << endl; 
+                cout << "Teclea la hora de la funcion (Solo Hora): " << endl; 
                 cin >> hora;
-                cout << "Ingrese los minutos de la hora de la funcion (Solo minutos): " << endl;
+                cout << "Teclea  los minutos de la hora de la funcion (Solo minutos): " << endl;
                 cin >> minutos; // se piden los atributos 
                 if ((hora>0 && hora<25) && (minutos>=0&&minutos<60)) //condiciones del formato de hora 24 Hrs // se verifica que esten en un formato valido 
                 	{
                 		 horaopcion4.SetHora(hora);		// se establecen en un objeto de tipo hora declarado antes
                 		 horaopcion4.SetMinutos(minutos);
                 	
-        			while (i<nofunciones) // mientras que el numero de funciones que se cargaron en la parte de funciones
+        			while (i<nofunciones) //lo hace  mientras que el numero de funciones que se cargaron en la parte de funciones
         			{
         				//comprueba la hora se encuentre entre funciones y lo que se agrego al objeto lo mismo para minutos 
-        				if(funciones[i].gethora().getHora()==horaopcion4.getHora() && funciones[i].gethora().getMinutos()==horaopcion4.getMinutos()) //accede primero a la hora de la funcion y luego a la clase Hora y verifica que exista una igual mediante horas y minutos
+        				if(funciones[i].gethora().getHora()==horaopcion4.getHora() && funciones[i].gethora().getMinutos()==horaopcion4.getMinutos()) 
+						//accede primero a la hora de la funcion (tipo hora) para luego accesar a la clase Hora y verifica que exista una igual mediante horas y minutos
         				{
+        					// si si hay una hora entra aqui 
         					int aux=0;
         					while (aux<peliculasenlista) // busca el numero de pelicula 
         					{
-        						if(funciones[i].getnumPeli()==peliculas[aux].GetnumPeli()) // busca que lo se cargo se encuentre en el arreglo peliculas cargado con  el archvo de txt
+        						if(funciones[i].getnumPeli()==peliculas[aux].GetnumPeli()) // busca que lo se cargo se encuentre en el arreglo peliculas pq tenemos que comprobar hora depues que esa hora corresponde a un numero de la clase pelicula para mostrar el titulo
 								
 								  {
-								  cout<<peliculas[aux].Gettitulo();         // si si se encuentra de el titulo 
+								  cout<<peliculas[aux].Gettitulo()<<endl;         // si si se encuentra muestra el titulo  // pq titulo se encuentra en peliculas
 								  aux++;
 								  }		
 								  aux++;
@@ -337,14 +363,14 @@ while (ArchEntP >> numPeli) {
 					if(controlador==true)
 					   {
 						
-						cout << "\n No hay funciones disponibles a esa hora. " << endl;
+						cout << "  funciones no disponibles a esa hora. " << endl;
 						
 					   }
 					
 					}			
 				else // se ingreso un formaot invalido
 					{
-						cout << "\nPor favor ingrese un formato valido.  " << endl;
+						cout << "  Teclea un formato valido.  " << endl;
 						goto go1;
 				    }  
 				
@@ -360,15 +386,17 @@ while (ArchEntP >> numPeli) {
 				int i=0;
 				int aux=0;
 			
-				cout<<"Ingrese la clave de la funcion";  //se pide la clave
+				cout<<"Teclea la clave de la funcion";  //se pide la clave
 				cin>>clave;
-				if(i<nofunciones)  // se realiza el loop que recorrera los arreglos con el numero de funciones que se ingresaron
+				while(i<nofunciones)  // se realiza el loop que recorrera los arreglos con el numero de funciones que se ingresaron
 				{
+					
 				  	if(clave==funciones[i].getcveFuncion())  // si la clave se encuentre en el arreglo funciones
 					  {
+					  
 					  	while(aux<peliculasenlista) // busca el numero de pelicula en base a la clave que se le dio en arreglofuncioens en el arreglo de peliculas cargado
 						  {   
-						  	if(funciones[i].getnumPeli()==peliculas[aux].GetnumPeli())
+						  	if(funciones[i].getnumPeli()==peliculas[aux].GetnumPeli()) // si hay una igual en las funciones que agregamos nos la mostrara
 						  	{
 						  		peliculas[aux].muestra(); // nos muestra a;o duracion genero y lista actores
 						  		
@@ -379,16 +407,18 @@ while (ArchEntP >> numPeli) {
 						  funciones[i].muestra(); // Muestra las funciones cargadas clave , numero hora  sala
 						  controlador=false;
 						  aux=0;
-						  //goto breik;	
+						  
 					  }
 					  i++;
-					   if ( controlador==true)
-					 {
-					    cout << "Por favor ingrese una Clave valida." << endl;
-					 }	  
 				}
+				if (controlador==true)
+				{
+					    cout << "Teclea una clave valida." << endl;
+				}	
 			
-				//breik:
+				
+			
+				
 				system("pause>nul"); // Pausa                
                 break;
 			}
@@ -402,51 +432,65 @@ while (ArchEntP >> numPeli) {
 			case 6:
 			{
 				int ID;
-				bool controlador;
+				bool controlador=true;
 				int i=0;
 				int aux=0;
-				cout<<"Ingrese el ID deL actor";
-				cin>>ID;
+				int j=0;
 				
-				while(i<actoresenlista)
+				cout<<"Tecle el ID deL actor";
+				cin>>ID;
+				while(i<actoresenlista)  // Se realiza mientras los actores que se cargaron a la lista 
 				{
-				  	if(ID==arregloactores[i].getid())
+				  	if(ID==arregloactores[i].getid())  // Se comprueba el ID se encuentre en el arreglo previamente cargado
 					  {
-					  	while(aux<peliculasenlista)
-						  {
-						  	if(funciones[i].getnumPeli()==peliculas[aux].GetnumPeli())
+					 	arregloactores[i].muestra(); // muestra ID Y nombre del actor
+					 	
+					 	
+						 while(aux<peliculasenlista)  // mientras el # de peliculas que se caragaron
 						  	{
-						  		peliculas[aux].muestra();
-						  		
+						  		while(j<peliculas[aux].GetcantActores()) // mientras la cantidad de actores
+								{
+									if(peliculas[aux].GetlistaActores(j).getid()==ID) // ingresa a los atributos de la clase ACTOR para buscar el id atraves de la clase pelicula
+									{
+										// si lo encuentra imprime
+										cout<<peliculas[aux].Gettitulo()<<"  "<<peliculas[aux].Getanio()<<endl;	
+									}
+									j++;
+								}
+							 j=0;
+							 aux++;
 							}
-							aux++;
-						  }
-						  funciones[i].muestra();
-						  controlador=false;
-						  aux=0;
-						  
-						  if( controlador==true)
-				{
-					cout << "Por favor ingrese una Clave valida." << endl;
-			    }
+							
+						controlador=false;	
 					  }
+					  aux=0;
 					  i++;
 					  
 			
 					  
 				}
-				
-			        
-                
-                system("pause>nul"); // Pausa            
-                break;
-				
+				 if (controlador == true)
+			{
+				cout << " Teclea   un ID valido." << endl;
 			}
+				  	
+					  
+			
+			 system("pause>nul"); // Pausa            
+            break;
+						  
+			}
+			
+			
+			    
+          
+				
+			
 				    
-        	
+     
 	}
                     
-    } while (opcion != 7);         
+    }  while (opcion != 7);         
         
         
     
@@ -457,5 +501,4 @@ while (ArchEntP >> numPeli) {
 	
 }
 
-	
 	
