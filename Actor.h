@@ -42,6 +42,6 @@ Actor::Actor(int i ,string n)
 
 void Actor::muestra()
 {
-	cout << "ID del Actor: " << id << "\t Nombre:" << nombre << endl<<endl;
+	cout << "ID del Actor: " << id << "   Nombre:" << nombre << endl<<endl;
 	cout<<"  "<<endl;
 }
